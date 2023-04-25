@@ -1,35 +1,61 @@
-import { useState } from 'react'
-import './App.css'
+import { useState } from "react";
+import "./App.css";
+import Calendar from "./components/Calendar";
+import Form from "./components/Form";
+import Modal from "./components/Modal";
+import Tasks from "./components/Tasks";
+import { useCookies } from 'react-cookie'
+import Auth from "./components/Auth";
+import ProfileDropDown from'./components/ProfileDropDown'
 
 function App() {
+  const [date, setDate] = useState(new Date().toDateString());
+  const [time, setTime] = useState();
+  const [form, setForm] = useState(null);
+  const [cookies, setCookie, removeCookie] = useCookies(null)
+  const authToken = cookies.AuthToken
+  setInterval(function () {
+    const options = { hour: "numeric", minute: "numeric" };
+    const t = new Date().toLocaleTimeString([], options);
+    setTime(t);
+  }, 500);
 
   return (
-    <div className="">
-<div className="h-100 w-full flex items-center justify-center bg-teal-lightest font-sans">
-	<div className="bg-white rounded shadow p-6 m-4 w-full lg:w-3/4 lg:max-w-lg">
-        <div className="mb-4">
-            <h1 className="text-gray-800">Todo List</h1>
-            <div className="flex mt-4">
-                <input className="shadow appearance-none border rounded w-full py-2 px-3 mr-4 text-gray-800" placeholder="Add Todo"/>
-                <button className="flex-no-shrink p-2 border-2 rounded text-teal border-teal hover:text-white hover:bg-teal">Add</button>
+    <div className="border-2 border-black p-4">
+      <div className="mt-3 text-sm text-[#8ea6c8] flex justify-between items-center">
+        <p className="text-blue-800">{date}</p>
+        <p className="text-black">{time}</p>
+      </div>
+      {/* <p className="text-xl font-semibold mt-2 text-[#063c76]">To-Do List</p> */}
+      {!authToken && <Auth/>}
+      {authToken &&<>
+      {form ? (
+        <Form setForm={setForm} />
+      ) : (
+        <>
+
+         <div>
+          <ProfileDropDown/>
+          </div>
+          <label className="label">
+            <input
+              className="input"
+              type="button"
+              onClick={() => setForm(true)}
+            />
+            <span>+</span>
+          </label>
+          <Calendar />
+          <div className="flex  min-h-tab ">
+            <div className="h-auto  w-[400px] bg-white rounded-lg p-4">
+              <Tasks/>
             </div>
-        </div>
-        <div>
-            <div className="flex mb-4 items-center">
-                <p className="w-full text-gray-800">Add another component to Tailwind Components</p>
-                <button className="flex-no-shrink p-2 ml-4 mr-2 border-2 rounded hover:text-white text-green-500 border-green-300 hover:bg-green-800">Done</button>
-                <button className="flex-no-shrink p-2 ml-2 border-2 rounded text-red-500 border-red-300 hover:text-white hover:bg-red-800">Remove</button>
-            </div>
-          	<div className="flex mb-4 items-center">
-                <p className="w-full line-through text-green-600">Submit Todo App Component to Tailwind Components</p>
-                <button className="flex-no-shrink p-2 ml-4 mr-2 border-2 rounded hover:text-white text-gray-500 border-gray-500 hover:bg-gray-800">Not Done</button>
-                <button className="flex-no-shrink p-2 ml-2 border-2 rounded text-red-400 border-red-400 hover:text-white hover:bg-red-600">Remove</button>
-            </div>
-        </div>
+          </div>
+        </>
+      )}
+       </>}
     </div>
-</div>
-    </div>
-  )
+  );
 }
 
-export default App
+export default App;

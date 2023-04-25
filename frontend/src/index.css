@@ -7,6 +7,10 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+  
+    --primary: #efb6b2;
+    --secondary: #4e4e4e;
+    --error: #ff4a4a;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
@@ -71,4 +75,37 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+.green{
+background-color:green !important;   
+}
+.strike_none {
+  text-decoration: none;
+}
+
+
+.label .input{
+  height:0;
+  width: 0;
+  opacity: 0;
+}
+.label{
+  display: block;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 2px solid var(--primary);
+  border-radius: 50%;
+  margin: 1rem auto;
+  line-height: 2rem;
+  color: green;
+  font-weight: bold;
+  font-size: 2rem;
+  cursor: pointer;
+
+}
+.label:hover{
+  background: var(--primary);
+  color: white;
+
 }

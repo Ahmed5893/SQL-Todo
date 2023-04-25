@@ -9,7 +9,11 @@ export default {
       colors: {
         'teal': '#e8fffe',
         'teal-lightest':'#dae4e9'
-      },},
+      },
+      minHeight: {
+        'tab': '90vh',
+      }
+    },
   },
   plugins: [],
 }
