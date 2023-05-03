@@ -4,7 +4,7 @@ dotenv.config();
 
 
 const db = new Sequelize(process.env.DATABASE, process.env.USERNAME, process.env.PASSWORD, {
-    host: 'localhost',
+    host: 'localhost'||process.env.HOST,
     dialect: 'postgres' ,
     pool: {
       max: 5,
