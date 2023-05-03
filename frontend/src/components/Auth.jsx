@@ -3,6 +3,7 @@ import React from "react";
 import { useState } from "react";
 import { useCookies } from "react-cookie";
 
+
 const Auth = () => {
   const [cookies, setCookie, removeCookie] = useCookies(null);
   const [isLogin, setIsLogin] = useState(true);
@@ -28,7 +29,7 @@ const Auth = () => {
       return;
     }
 
-    const res = await axios.post(`${process.env.REACT_APP_SERVERURL}/auth/${endpoint}`, {
+    const res = await axios.post(`${import.meta.env.VITE_APP}/auth/${endpoint}`, {
       name: data.name,
       email: data.email,
       password: data.password,
