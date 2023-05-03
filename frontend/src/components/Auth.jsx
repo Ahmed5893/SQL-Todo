@@ -28,7 +28,7 @@ const Auth = () => {
       return;
     }
 
-    const res = await axios.post(`http://localhost:5001/auth/${endpoint}`, {
+    const res = await axios.post(`${process.env.REACT_APP_SERVERURL}/auth/${endpoint}`, {
       name: data.name,
       email: data.email,
       password: data.password,

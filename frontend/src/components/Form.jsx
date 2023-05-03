@@ -21,7 +21,7 @@ const Form = ({setForm}) => {
   return;
   }
   // const formattedDate = new Date(date).toISOString();
-  axios.post('http://localhost:5001/tasks/add', { userId:cookies.id,task, dueDate: date, priority })
+  axios.post(`${process.env.REACT_APP_SERVERURL}/tasks/add`, { userId:cookies.id,task, dueDate: date, priority })
     .then((res) => {
     console.log(res.data); 
     setForm(null)
