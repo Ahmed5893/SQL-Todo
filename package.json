@@ -7,7 +7,9 @@
     "start": "node backend/server",
     "server": "nodemon backend/server",
     "client": "npm start --prefix frontend",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "build": "if-env TYPE=server && (cd server && npm install) || (cd client && npm install)"
+
   },
   "author": "",
   "license": "MIT",
