@@ -29,7 +29,7 @@ const Auth = () => {
       return;
     }
 
-    const res = await axios.post(`${import.meta.env.VITE_APP}/auth/${endpoint}`, {
+    const res = await axios.post(`/api/auth/${endpoint}`, {
       name: data.name,
       email: data.email,
       password: data.password,

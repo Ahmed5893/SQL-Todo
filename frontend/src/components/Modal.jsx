@@ -7,7 +7,7 @@ const Modal = ({setModal,selectedTask,setTasks,setSelectedTask}) => {
         try {
           const updatedTask = { ...selectedTask, task: selectedTask.task,dueDate:selectedTask.dueDate,priority: selectedTask.priority};
           await axios.patch(
-            `${import.meta.env.VITE_APP}/tasks/edit/${selectedTask.id}`,
+            `/api/tasks/edit/${selectedTask.id}`,
             updatedTask
           );
           setTasks(

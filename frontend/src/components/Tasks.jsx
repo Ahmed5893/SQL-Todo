@@ -30,7 +30,7 @@ function Tasks() {
   const getData=async()=> {
 
     try {
-      const res=await axios.get(`${import.meta.env.VITE_APP}/tasks/${userId}`);
+      const res=await axios.get(`/api/tasks/${userId}`);
        const data=await res.data;
        setTasks(data)
     } catch (error) {
@@ -50,7 +50,7 @@ function Tasks() {
   };
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`${import.meta.env.VITE_APP}/tasks/delete/${id}`);
+      await axios.delete(`/api/tasks/delete/${id}`);
       setTasks(tasks.filter((task) => task.id !== id));
     } catch (error) {
       console.log(error);
@@ -62,7 +62,7 @@ function Tasks() {
   };
   const handleComplete = async (id) => {
     try {
-      await axios.patch(`${import.meta.env.VITE_APP}/tasks/done/${id}`, {
+      await axios.patch(`/api/tasks/done/${id}`, {
       isCompleted: !tasks.find(task => task.id === id).isCompleted
     });
       setTasks(

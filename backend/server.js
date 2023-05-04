@@ -23,7 +23,7 @@ const connect = async () => {
 };
 connect();
 
-app.get("/", (req, res) => {
+app.get("/api", (req, res) => {
   res.send("API is running...");
 });
 //routes

@@ -21,7 +21,7 @@ const Form = ({setForm}) => {
   return;
   }
   // const formattedDate = new Date(date).toISOString();
-  axios.post(`${import.meta.env.VITE_APP}/tasks/add`, { userId:cookies.id,task, dueDate: date, priority })
+  axios.post(`${import.meta.env.VITE_APP}/api/tasks/add`, { userId:cookies.id,task, dueDate: date, priority })
     .then((res) => {
     console.log(res.data); 
     setForm(null)
