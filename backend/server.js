@@ -29,8 +29,8 @@ app.get("/", (req, res) => {
 //routes
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use("/tasks", router);
-app.use("/auth", auth);
+app.use("/api/tasks", router);
+app.use("/api/auth", auth);
 
 app.listen(
   PORT,
