@@ -29,7 +29,7 @@ const Auth = () => {
       return;
     }
 
-    const res = await axios.post(`/api/auth/${endpoint}`, {
+    const res = await axios.post(`http://localhost:5001/api/auth/${endpoint}`, {
       name: data.name,
       email: data.email,
       password: data.password,

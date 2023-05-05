@@ -2,17 +2,17 @@ const express = require("express");
 const dotenv = require("dotenv");
 const db = require("./config/db");
 const userModal = require("./models/userModal");
-
-const taskModal = require("./models/taskModal");
-const router = require("./routes/tasks");
+const path = require('path');
 const cors = require("cors");
 const auth = require("./routes/auth");
+const taskModal = require("./models/taskModal");
+const router = require("./routes/tasks");
+
 const app = express();
 dotenv.config();
 app.use(cors());
 
-const PORT = process.env.PORT || 5001;
-//test database connection
+// Connect to the database
 const connect = async () => {
   try {
     await db.authenticate();
@@ -23,18 +23,27 @@ const connect = async () => {
 };
 connect();
 
-app.get("/api", (req, res) => {
-  res.send("API is running...");
+// Serve the static files
+const buildPath = path.join(__dirname, "../frontend/dist");
+app.use(express.static(buildPath));
+
+// Route for index.html
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/dist/index.html"), function (
+    err
+  ) {
+    if (err) {
+      res.status(500).send(err);
+    }
+  });
 });
-//routes
+
+// Routes for API
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use("/api/tasks", router);
 app.use("/api/auth", auth);
 
-app.listen(
-  PORT,
-  console.log(
-    `Server listening in ${process.env.NODE_ENV} mode on port ${PORT}`
-  )
-);
+const PORT = process.env.PORT || 5001;
+
+app.listen(PORT, console.log(`Server listening on port ${PORT}`));
